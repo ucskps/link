@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบริหารจัดการ | โรงพยาบาลกำแพงแสน</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f4f6f9;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- ดึงเว็บจาก Google Script ของคุณมาแสดง -->
+    <iframe src="https://script.google.com/macros/s/AKfycbw6LaThgvSqk7KFzkOs9ZQefIqOUbk5NED5PZ3uGZA8LWHKMpWi1VHdErkShgOinDd6/exec"></iframe>
+</body>
+</html>
