@@ -3,14 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบบริหารจัดการ | โรงพยาบาลกำแพงแสน</title>
+    <title>ระบบศูนย์รวม | โรงพยาบาลกำแพงแสน</title>
     <style>
+        /* จัดการโครงสร้างหน้าเว็บไม่ให้มีแถบเลื่อน (Scrollbar) ซ้อนกัน */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+        /* ตกแต่งแถบเมนูด้านบน */
+        .navbar {
+            background-color: #0056b3; /* สีน้ำเงินสไตล์การแพทย์ */
+            display: flex;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            align-items: center;
+        }
+        /* ตกแต่งปุ่มกด */
+        .navbar a {
+            color: #f2f2f2;
+            text-align: center;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #004494;
+            color: white;
+        }
+        .navbar a.active {
+            background-color: #ff9800; /* สีส้มเน้นปุ่มที่กำลังใช้งานอยู่ */
+            color: white;
+            font-weight: bold;
+        }
+        /* ตกแต่งชื่อหน่วยงาน */
+        .brand {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: auto; /* ดันเมนูไปทางขวา */
+        }
+        /* พื้นที่แสดงผลเว็บ (iframe) */
+        .content {
+            flex-grow: 1; /* ขยายพื้นที่ให้เต็มจออัตโนมัติ */
+            width: 100%;
         }
         iframe {
             width: 100%;
@@ -21,7 +65,40 @@
     </style>
 </head>
 <body>
-    <!-- ดึงเว็บจาก Google Script ของคุณมาแสดง -->
-    <iframe src="https://script.google.com/macros/s/AKfycbw6LaThgvSqk7KFzkOs9ZQefIqOUbk5NED5PZ3uGZA8LWHKMpWi1VHdErkShgOinDd6/exec"></iframe>
+
+    <!-- แถบเมนูด้านบน -->
+    <div class="navbar">
+        <div class="brand">ระบบงาน รพ.กำแพงแสน</div>
+        
+        <!-- แก้ไขลิงก์ในเครื่องหมายฟันหนู '...' ให้เป็นลิงก์ /exec ของคุณ -->
+        <a id="nav1" class="active" onclick="loadPage('https://script.google.com/macros/s/AKfycbw6LaThgvSqk7KFzkOs9ZQefIqOUbk5NED5PZ3uGZA8LWHKMpWi1VHdErkShgOinDd6/exec', 'nav1')">หน้าหลัก</a>
+        
+        <a id="nav2" onclick="loadPage('ใส่ลิงก์_Apps_Script_ที่_2_ตรงนี้', 'nav2')">งานประกันสุขภาพ</a>
+        
+        <a id="nav3" onclick="loadPage('ใส่ลิงก์_Apps_Script_ที่_3_ตรงนี้', 'nav3')">รายงานสรุป</a>
+    </div>
+
+    <!-- หน้าต่างแสดงผล -->
+    <div class="content">
+        <!-- src ตรงนี้คือหน้าแรกที่จะให้โหลดขึ้นมาตอนเปิดเว็บ -->
+        <iframe id="appFrame" src="https://script.google.com/macros/s/AKfycbw6LaThgvSqk7KFzkOs9ZQefIqOUbk5NED5PZ3uGZA8LWHKMpWi1VHdErkShgOinDd6/exec"></iframe>
+    </div>
+
+    <!-- สคริปต์สลับหน้าโดยไม่ต้องรีเฟรช -->
+    <script>
+        function loadPage(url, navId) {
+            // เปลี่ยนลิงก์ใน iframe
+            document.getElementById('appFrame').src = url;
+            
+            // ล้างสีปุ่มเมนูทั้งหมด
+            let navLinks = document.querySelectorAll('.navbar a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // ไฮไลต์สีปุ่มที่เพิ่งถูกกด
+            if(navId) {
+                document.getElementById(navId).classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
